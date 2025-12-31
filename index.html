@@ -22,6 +22,17 @@
     <div id="gallery" class="gallery"></div>
   </main>
 
-  <script src="gallery.js"></script>
+  <!-- LOGIN CHECK AND DYNAMIC SCRIPT LOADING -->
+  <script>
+    if(localStorage.getItem('loggedIn') !== 'true'){
+      window.location.href = 'login.html';
+    } else {
+      // Dynamically load gallery.js only if logged in
+      const script = document.createElement('script');
+      script.src = 'gallery.js';
+      document.body.appendChild(script);
+    }
+  </script>
+
 </body>
 </html>

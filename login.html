@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Gallery Login</title>
+
+  <!-- Prevent search engines indexing -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Include your existing CSS for consistent styling -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Center the login box in the page */
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh; /* Vertically center within viewport */
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      text-align: center;
+    }
+
+    /* Style inputs and buttons for usability and aesthetics */
+    .login-container input,
+    .login-container button {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    /* Button specific styling */
+    .login-container button {
+      cursor: pointer;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+
+    .login-container button:hover {
+      background: #e60000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header to match the gallery page -->
+  <header class="header">
+    <h1>Our Wedding</h1>
+    <p>Scroll, tap, download ❤️</p>
+  </header>
+
+  <main>
+    <!-- Login box container -->
+    <div class="login-container">
+      <input type="password" id="password" placeholder="Password" autofocus />
+      <button onclick="login()">Enter</button>
+      <p id="error" style="color:red; display:none;">Incorrect password</p>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * SHA-256 hash of your chosen password.
+     * Replace this value if you want to change the password.
+     * Storing only the hash improves security: 
+     * the password itself is never exposed in the code.
+     */
+    const PASSWORD_HASH = "795ca854df9d7ddaa52771f05c2963f39cd7932e1083c8347409fee45a1dda6a";
+
+    /**
+     * Helper function to generate SHA-256 hash in the browser.
+     * Returns a hexadecimal string representation of the hash.
+     */
+    async function sha256(text) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    /**
+     * Main login function.
+     * Compares the hash of the entered password to the stored hash.
+     * If correct, sets a flag in localStorage and redirects to the gallery.
+     * If incorrect, shows an error message.
+     */
+    async function login() {
+      const input = document.getElementById("password").value;
+      const hash = await sha256(input);
+
+      if (hash === PASSWORD_HASH) {
+        // Password correct → store login flag
+        localStorage.setItem("loggedIn", "true");
+        // Redirect to gallery page
+        window.location.href = "index.html";
+      } else {
+        // Password incorrect → show error
+        document.getElementById("error").style.display = "block";
+      }
+    }
+
+    /**
+     * Redirect if already logged in.
+     * This prevents users from seeing the login page again
+     * if they already entered the password previously.
+     */
+    if (localStorage.getItem('loggedIn') === 'true') {
+      window.location.href = 'index.html';
+    }
+
+    /**
+     * Listen for the Enter key in the password input.
+     * This allows users to type password and press Enter
+     * instead of clicking the "Enter" button.
+     */
+    document.getElementById("password").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
+  </script>
+
+</body>
+</html>
