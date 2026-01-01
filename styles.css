@@ -61,7 +61,7 @@ main {
 }
 
 /* ------------------------------
-   Gallery grid (desktop default)
+   Gallery grid (desktop)
 --------------------------------*/
 
 .gallery {
@@ -116,50 +116,4 @@ main {
 }
 
 /* ======================================================
-   MOBILE ONLY STYLES
-   Everything below only applies to phones
-====================================================== */
-
-@media (max-width: 700px) {
-
-  /* Remove side background on mobile */
-  body {
-    background: #ffffff;
-  }
-
-  .page {
-    box-shadow: none;
-  }
-
-  main {
-    padding: 0.75rem;
-  }
-
-  /* Fewer columns = bigger photos */
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  /* Taller images = less aggressive crop */
-  .gallery img {
-    height: 220px;
-    border-radius: 14px;
-
-    /* Disable hover lift on touch */
-    transform: none !important;
-    box-shadow: none !important;
-  }
-}
-
-/* Extra-small phones */
-@media (max-width: 420px) {
-
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery img {
-    height: 260px;
-  }
-}
+   MOBILE ONLY — smar
