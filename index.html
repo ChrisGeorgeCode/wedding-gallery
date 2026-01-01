@@ -2,37 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Wedding Gallery</title>
+  <title>Our Wedding Gallery</title>
 
   <!-- Prevent search engines indexing -->
   <meta name="robots" content="noindex, nofollow">
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <header class="header">
-    <h1>Our Wedding</h1>
-    <p>Scroll, tap, download ❤️</p>
-  </header>
+  <!-- Page wrapper (album look) -->
+  <div class="page">
 
-  <main>
-    <div id="gallery" class="gallery"></div>
-  </main>
+    <!-- Header -->
+    <header class="header">
+      <h1>Our Wedding</h1>
+      <p>Scroll, tap, download ❤️</p>
+    </header>
 
-  <!-- LOGIN CHECK AND DYNAMIC SCRIPT LOADING -->
+    <!-- Gallery -->
+    <main>
+      <div id="gallery" class="gallery"></div>
+    </main>
+
+  </div>
+
+  <!-- Login protection -->
   <script>
-    if(localStorage.getItem('loggedIn') !== 'true'){
+    /*
+      This runs immediately when the page loads.
+      If the user has NOT logged in successfully,
+      they are redirected to the login page.
+    */
+    if (localStorage.getItem('loggedIn') !== 'true') {
       window.location.href = 'login.html';
-    } else {
-      // Dynamically load gallery.js only if logged in
-      const script = document.createElement('script');
-      script.src = 'gallery.js';
-      document.body.appendChild(script);
     }
   </script>
+
+  <!-- Gallery logic -->
+  <script src="gallery.js"></script>
 
 </body>
 </html>

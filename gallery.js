@@ -1,27 +1,30 @@
-async function loadGallery() {
-  const response = await fetch('data.json');
-  const items = await response.json();
+fetch("data.json")
+  .then(response => response.json())
+  .then(images => {
+    const gallery = document.getElementById("gallery");
 
-  const gallery = document.getElementById('gallery');
+    images.forEach(item => {
+      // Create link for full-size download
+      const link = document.createElement("a");
+      link.href = item.original;
+      link.target = "_blank";
+      link.download = "";
 
-  items.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-
-    if (item.type === 'image') {
-      const img = document.createElement('img');
+      // Create image element
+      const img = document.createElement("img");
       img.src = item.thumbnail;
-      img.loading = 'lazy';
+      img.alt = "Wedding photo";
 
-      img.addEventListener('click', () => {
-        window.open(item.original, '_blank');
-      });
+      // Fade-in effect (polish)
+      img.style.opacity = 0;
+      img.onload = () => {
+        img.style.opacity = 1;
+      };
 
-      div.appendChild(img);
-    }
-
-    gallery.appendChild(div);
+      link.appendChild(img);
+      gallery.appendChild(link);
+    });
+  })
+  .catch(err => {
+    console.error("Failed to load gallery data:", err);
   });
-}
-
-loadGallery();

@@ -1,36 +1,141 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ------------------------------
+   Global page background
+--------------------------------*/
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #fafafa;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+
+  /* Soft side color */
+  background:
+    linear-gradient(
+      to right,
+      #f1ede7 0%,
+      #faf7f3 20%,
+      #ffffff 50%,
+      #faf7f3 80%,
+      #f1ede7 100%
+    );
+
   color: #333;
 }
 
-.header {
-  text-align: center;
-  padding: 1.5rem 1rem;
+/* ------------------------------
+   Page wrapper (album page)
+--------------------------------*/
+
+.page {
+  max-width: 1500px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  min-height: 100vh;
 }
+
+/* ------------------------------
+   Header / hero
+--------------------------------*/
+
+.header {
+  padding: 3rem 1rem 2rem;
+  text-align: center;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.header p {
+  margin-top: 0.5rem;
+  opacity: 0.75;
+}
+
+/* ------------------------------
+   Main content
+--------------------------------*/
+
+main {
+  padding: 1rem 1.5rem 3rem;
+}
+
+/* ------------------------------
+   Gallery grid
+--------------------------------*/
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
-  padding: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
 }
 
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-}
+/* ------------------------------
+   Gallery images
+--------------------------------*/
 
-.gallery-item img {
+.gallery img {
   width: 100%;
-  height: 100%;
+  height: 170px;
   object-fit: cover;
-  display: block;
+  border-radius: 16px;
   cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.6s ease;
+}
+
+.gallery img:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+}
+
+/* ------------------------------
+   Login page styling
+--------------------------------*/
+
+.login-container {
+  animation: fadeUp 0.5s ease;
+}
+
+/* ------------------------------
+   Subtle animation
+--------------------------------*/
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------
+   Mobile tweaks
+--------------------------------*/
+
+@media (max-width: 900px) {
+  body {
+    background: #ffffff;
+  }
+
+  .page {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 2.1rem;
+  }
+
+  .gallery img {
+    height: 140px;
+  }
 }
