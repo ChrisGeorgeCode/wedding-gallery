@@ -7,28 +7,24 @@
 
   <title>Our Wedding Gallery</title>
 
-  <!-- Prevent search engines indexing -->
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Cache-busted styles -->
+  <link rel="stylesheet" href="styles.css?v=FINAL1" />
 </head>
 
 <body>
 
-  <!-- Page wrapper (album look) -->
   <div class="page">
 
-    <!-- Header -->
     <header class="header">
       <h1>Our Wedding</h1>
       <p>Scroll, tap, download ❤️</p>
     </header>
 
-    <!-- Gallery -->
     <main>
       <div id="gallery" class="gallery"></div>
     </main>
@@ -37,17 +33,11 @@
 
   <!-- Login protection -->
   <script>
-    /*
-      This runs immediately when the page loads.
-      If the user has NOT logged in successfully,
-      they are redirected to the login page.
-    */
     if (localStorage.getItem('loggedIn') !== 'true') {
       window.location.href = 'login.html';
     }
   </script>
 
-  <!-- Gallery logic -->
   <script src="gallery.js"></script>
 
 </body>
