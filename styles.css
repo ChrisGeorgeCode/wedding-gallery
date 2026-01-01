@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
 
-  /* Soft side color */
   background:
     linear-gradient(
       to right,
@@ -62,7 +61,7 @@ main {
 }
 
 /* ------------------------------
-   Gallery grid
+   Gallery grid (desktop default)
 --------------------------------*/
 
 .gallery {
@@ -72,7 +71,7 @@ main {
 }
 
 /* ------------------------------
-   Gallery images
+   Gallery images (desktop)
 --------------------------------*/
 
 .gallery img {
@@ -94,7 +93,7 @@ main {
 }
 
 /* ------------------------------
-   Login page styling
+   Login animation
 --------------------------------*/
 
 .login-container {
@@ -116,11 +115,14 @@ main {
   }
 }
 
-/* ------------------------------
-   Mobile tweaks
---------------------------------*/
+/* ======================================================
+   MOBILE ONLY STYLES
+   Everything below only applies to phones
+====================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
+
+  /* Remove side background on mobile */
   body {
     background: #ffffff;
   }
@@ -128,14 +130,36 @@ main {
   .page {
     box-shadow: none;
   }
+
+  main {
+    padding: 0.75rem;
+  }
+
+  /* Fewer columns = bigger photos */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Taller images = less aggressive crop */
+  .gallery img {
+    height: 220px;
+    border-radius: 14px;
+
+    /* Disable hover lift on touch */
+    transform: none !important;
+    box-shadow: none !important;
+  }
 }
 
-@media (max-width: 600px) {
-  .header h1 {
-    font-size: 2.1rem;
+/* Extra-small phones */
+@media (max-width: 420px) {
+
+  .gallery {
+    grid-template-columns: 1fr;
   }
 
   .gallery img {
-    height: 140px;
+    height: 260px;
   }
 }
